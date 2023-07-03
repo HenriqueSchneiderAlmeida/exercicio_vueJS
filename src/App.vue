@@ -1,5 +1,7 @@
 <script setup>
   import { reactive } from 'vue';
+  import Cabec from './Cabec.vue';
+  import Formulario from './Formulario.vue';
 
   const estado = reactive ({
     operacao: 'somar',
@@ -39,32 +41,8 @@ const getDividir = () => {
  
 <template>
   <div class="conteiner m-5">
-    <header class="p-5 mb-4 mt-4 bg-light rounded-3"> <!-- bg-light backgrond e rounded-3 para arredondar a borda -->
-      <h1 class="">Calculadora aritmética</h1>
-      <p class="fs-3">Resultado da Operação = <span class="badge bg-secondary fs-3">{{ estado.resultado  }}</span></p>
-    </header>
-    <form class="form-floating" @submit.prevent="getResultadoCalculado">
-      <div class="row">
-        <div class="col-md-4">
-          <input class="form-control" type="number" @change="evento => estado.numero01 = evento.target.value" @blur="getResultadoCalculado" required placeholder="Digite aqui o primeiro valor">
-        </div>
-        <div class="col-md-4">
-          <input class="form-control" type="number" @change="evento => estado.numero02 = evento.target.value" @blur="getResultadoCalculado" required placeholder="Digite aqui o segundo valor">
-        </div>
-        
-        <div class="col-md-2">
-          <select @change="evento => estado.operacao = evento.target.value" @blur="getResultadoCalculado" class="form-select">
-            <option value="somar">Somar</option>
-            <option value="diminuir">Diminuir</option>
-            <option value="multiplicar">Multiplicar</option>
-            <option value="dividir">Dividir</option>
-          </select>
-        </div>
-        <div class="col-md-2">
-            <button type="submit" class="btn btn-secondary" disabled>Calcular</button>
-        </div>
-      </div>  
-    </form>
+    <Cabec :get-resultado-calculado="getResultadoCalculado()"></Cabec>
+    <Formulario :get-resultado-calculado="getResultadoCalculado()" :capta-numero01="evento => estado.numero01 = evento.target.value" :capta-numero02="evento => estado.numero02 = evento.target.value" :capta-operacao="evento => estado.operacao = evento.target.value" ></Formulario>
   </div>
 </template>
 
